@@ -12,3 +12,9 @@ h2 {
   padding: 0;
 
 }
+
+.link {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
