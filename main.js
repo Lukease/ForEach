@@ -12,7 +12,6 @@ const consoleLogNumbers = () => {
 consoleLogNumbers()
 
 const numbersSecond = [32, 16, 8, 4, 2, 1]
-
 let circle = document.querySelector('.ring')
 const consoleLogRing = () => {
     numbersSecond.forEach(number => {
@@ -20,23 +19,12 @@ const consoleLogRing = () => {
         const allCircle = document.querySelectorAll('div')
         const lastCircle = allCircle[allCircle.length - 1]
 
-        if (circle.hasChildNodes()) {
-
-            const newCircle = document.createElement('div')
-            newCircle.classList.add('ring')
-            lastCircle.appendChild(newCircle)
-            newCircle.style.width = number + 'px'
-            newCircle.style.height = number + 'px'
-            newCircle.style.borderStyle = 'solid'
-
-        } else if (!circle.hasChildNodes()) {
-            const newCircle = document.createElement('div')
-            newCircle.classList.add('ring')
-            circle.appendChild(newCircle)
-            newCircle.style.width = number + 'px'
-            newCircle.style.height = number + 'px'
-            newCircle.style.borderStyle = 'solid'
-        }
+        const newCircle = document.createElement('div')
+        newCircle.classList.add('ring')
+        lastCircle.appendChild(newCircle)
+        newCircle.style.width = `${number}px`
+        newCircle.style.height = `${number}px`
+        newCircle.style.borderStyle = 'solid'
     })
 }
 
@@ -45,11 +33,10 @@ consoleLogRing()
 //#3
 const allNames = [{name: 'Jacek'}, {name: 'Kamil'}, {name: 'Robert'}, {name: 'Piotr'}, {name: 'Krzysztof'}]
 
-allNames.forEach(number => {
+allNames.forEach(object => {
         const names = document.querySelector('.names')
         const oneName = document.createElement('h2')
-        const nameText = number.name.toString()
-        oneName.textContent = nameText
+        oneName.textContent = object.name
         names.appendChild(oneName)
     }
 )
@@ -63,8 +50,8 @@ const timeoutIds = [
     setTimeout(callback, 5000)
 ]
 
-timeoutIds.forEach(number => {
-    window.clearTimeout(number)
+timeoutIds.forEach(timeout => {
+    window.clearTimeout(timeout)
 })
 
 //#5
@@ -77,12 +64,12 @@ const links = [
 ]
 
 
-links.forEach(number => {
+links.forEach(link => {
 
     const menu = document.querySelector('.menu')
-    const title = number.label
-    const address = number.url
-    const color = number.color
+    const title = link.label
+    const address = link.url
+    const color = link.color
 
     const newBox = document.createElement('a')
     newBox.classList.add('link')
@@ -97,6 +84,9 @@ links.forEach(number => {
 const number = [112, 265, 999, 451, 22, 76, 1996, 100, 2, 55]
 
 const newNumber = number.map(x => {
+    if (x % 2 === 0) {
+        return 0
+    }
     return x % 2
 })
 console.log(newNumber)
@@ -113,8 +103,8 @@ const name = ['Wojtek Szczęsny',
     'Piotr Zieliński',
     'Matty Cash']
 const newNames = name.map(x => {
-    const onlyFirstName = x.split(' ')[0]
-    return console.log(onlyFirstName)
+    const [firstName] = x.split(' ')
+    return console.log(firstName)
 })
 
 //#8
@@ -130,8 +120,8 @@ const nameAndSurrname = ['Wojtek Szczęsny',
     'Matty Cash']
 
 const newLastNames = nameAndSurrname.map(x => {
-    const onlyLastName = x.split(' ')[1]
-    return console.log(onlyLastName)
+    const [, lastName] = x.split(' ')
+    return console.log(lastName)
 })
 
 //#9
@@ -202,10 +192,9 @@ const arrayOf = [
 const newArrayOf = arrayOf.map(x => {
     if (x === null) {
         return 'null'
-    } else (x === undefined)
-    {
-        return 'nothing'
     }
+    return 'nothing'
+
 })
 console.log(newArrayOf)
 
@@ -244,9 +233,9 @@ const allCompanyInfo = [
     {company: 'Tesla', value: {lastYear: '40B', thisYear: '130B'}},
 ]
 
-const companyValueLastYear = allCompanyInfo.map(x => {
-    const beforeNumber = parseInt(x.value.lastYear)
-    return beforeNumber
+const companyValueLastYear = allCompanyInfo.map(object => {
+    return  parseInt(object.value.lastYear)
+
 })
 console.log(companyValueLastYear)
 
@@ -267,9 +256,7 @@ const newNumbers = [
 const valueArray = newNumbers.map(x => {
     if (x[0] > x[1]) {
         return x[0]
-    } else (x[0] < x[1])
-    {
-        return x[1]
     }
+        return x[1]
 })
 console.log(valueArray)
